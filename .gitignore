@@ -1,3 +1,7 @@
 /Depth-Anything/metric_depth/my_test/input/*
 /Depth-Anything/metric_depth/my_test/output/*
 .vscode/
+/debug/aligned_frame
+/debug/relative_frame
+/Calibration/Posed_Images
+

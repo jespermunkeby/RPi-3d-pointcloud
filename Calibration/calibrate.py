@@ -7,8 +7,8 @@ import json
 ARUCO_DICT = cv2.aruco.DICT_6X6_250
 SQUARES_VERTICALLY = 7
 SQUARES_HORIZONTALLY = 5
-SQUARE_LENGTH = 0.03
-MARKER_LENGTH = 0.015
+SQUARE_LENGTH = 0.05
+MARKER_LENGTH = 0.0255
 
 def get_camera_matrix_distortion_coeffs(image_path):
     # Define the aruco dictionary and charuco board
@@ -96,8 +96,8 @@ def main(image_path):
                 "translation_vector": tvec.tolist()
             }
 
-        cv2.imshow('Pose Image', pose_image)
-        cv2.waitKey(0)
+        #cv2.imshow('Pose Image', pose_image)
+        #cv2.waitKey(0)
 
         cv2.imwrite(os.path.join(pos_img_dir, os.path.basename(image_file)), pose_image)
 
@@ -105,7 +105,7 @@ def main(image_path):
     with open('image_vectors.json', 'w') as f:
         json.dump(image_vectors, f, indent=4)
 
-    cv2.destroyAllWindows()
+    #cv2.destroyAllWindows()
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
