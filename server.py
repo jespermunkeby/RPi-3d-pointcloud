@@ -32,6 +32,8 @@ def put():
     if not files or files[0].filename == '':
         return jsonify({'message': 'No selected file'}), 400
 
+    cleanup_directories()
+
     for i, file in enumerate(files):
         file.save(f'Depth-Anything/metric_depth/my_test/input/{i}.jpg')
 
@@ -79,6 +81,7 @@ def generate_pointcloud():
     #Load all pointclouds
 
     all_files = sorted(os.listdir('Depth-Anything/metric_depth/my_test/output/'))
+    print(all_files)
     pointclouds = [o3d.io.read_point_cloud("Depth-Anything/metric_depth/my_test/output/"+f) for f in all_files]
 
     #Load all rv, tv
@@ -86,7 +89,10 @@ def generate_pointcloud():
     with open('Calibration/image_vectors.json', 'r') as f:
         data = json.load(f)
     
+    print(data.keys())
     sorted_keys = sorted(data.keys())
+
+    print(json.dumps(data, indent=2))
 
     rvecs = [data[key]['rotation_vector'] for key in sorted_keys]
     tvecs = [data[key]['translation_vector'] for key in sorted_keys]
@@ -162,8 +168,20 @@ def draw_reference_frame(pcd, rvec, tvec):
             pcd.colors = o3d.utility.Vector3dVector(np.vstack((np.asarray(pcd.colors), color)))
 
 
-
-        
+def cleanup_directories():
+    to_clean_dir_paths = [
+        "Depth-Anything/metric_depth/my_test/input",
+        "Depth-Anything/metric_depth/my_test/output",
+        "Calibration/images",
+        "Calibration/Posed_Images",
+        "debug/aligned_frame",
+        "debug/relative_frame",
+    ]
+    
+    for path in to_clean_dir_paths:
+        for filename in os.listdir(path):
+            file_path = os.path.join(path, filename)
+            os.remove(file_path)
 
 
 if __name__ == '__main__':

@@ -39,8 +39,13 @@ def get_camera_matrix_distortion_coeffs(image_path):
         image_copy = image.copy()
         marker_corners, marker_ids, _ = cv2.aruco.detectMarkers(image, dictionary, parameters=params)
 
+<<<<<<< HEAD
+        if not marker_ids.any():
+            print(f"failed to get markers from {image_file}")
+=======
         if marker_ids[0] == None:
             exit
+>>>>>>> fc7db8cfe9937c2303efa5c6858335270a5685f8
         
         # If at least one marker is detected
         if len(marker_ids) > 0:
@@ -51,6 +56,8 @@ def get_camera_matrix_distortion_coeffs(image_path):
                 all_charuco_ids.append(charuco_ids)
             else:
                 print(f"Skipping image {image_file} due to insufficient corner detections.")
+        
+        
 
     # camera calibration
     _, camera_matrix, dist_coeffs, _, _= cv2.aruco.calibrateCameraCharuco(all_charuco_corners, all_charuco_ids, board, image.shape[:2], None, None)
@@ -102,7 +109,7 @@ def main(image_path):
     #print(f"dist coeffs:\n{dist_coeffs}")
 
     pos_img_dir = os.path.join('Posed_Images')
-    os.makedirs(pos_img_dir, exist_ok=True)  
+    os.makedirs(pos_img_dir, exist_ok=True) 
 
 
     # Dictionary to hold image filename and its vectors
