@@ -68,7 +68,8 @@ def detect_pose(image, camera_matrix, dist_coeffs):
     # Undistort the image
     undistorted_image = cv2.undistort(image, camera_matrix, dist_coeffs)
 
-    # Define the aruco dictionary and charuco board
+    # Define the aruco dictionary and 
+        if not marker_ids.any():charuco board
     dictionary = cv2.aruco.getPredefinedDictionary(ARUCO_DICT)
     board = cv2.aruco.CharucoBoard((SQUARES_VERTICALLY, SQUARES_HORIZONTALLY), SQUARE_LENGTH, MARKER_LENGTH, dictionary)
     params = cv2.aruco.DetectorParameters()
