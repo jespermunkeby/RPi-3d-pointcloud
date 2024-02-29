@@ -132,7 +132,7 @@ def main(image_path):
     with open('image_vectors.json', 'w') as f:
         json.dump(image_vectors, f, indent=4)
 
-    cv2.destroyAllWindows()
+    #cv2.destroyAllWindows()
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
