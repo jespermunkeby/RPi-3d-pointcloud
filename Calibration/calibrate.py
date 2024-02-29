@@ -13,16 +13,13 @@ MARKER_LENGTH = 0.0255
 #matrix_from_internet =  [[6.5746697944293521e+002 0.00000e+00 3.1950000000000000e+002] [0.00000e+00 6.5746697944293521e+002 2.3950000000000000e+002][0.0000e+00 0.0000e+00 1.000000e+00]]
 
 ### GOOD MATRIX
-v2_matrix = [[2.54925342e+03, 0.00000000e+00, 1.62541108e+03],
- [0.00000000e+00, 2.54837090e+03, 1.32090857e+03],
- [0.00000000e+00, 0.00000000e+00, 1.00000000e+00]]
- 
-### GOOD DISTORTION COEFFS
-v2_distortion = [[2.09253024e-01, -5.57973833e-01, 1.47519344e-03, 1.94738699e-04,
-                  4.32871098e-01]]
+#v2_matrix = [[2.54925342e+03, 0.00000000e+00, 1.62541108e+03], [0.00000000e+00, 2.54837090e+03, 1.32090857e+03], [0.00000000e+00, 0.00000000e+00, 1.00000000e+00]]
+v2_matrix = [[2.54919911e+03, 0.00000000e+00, 1.62543433e+03], [0.00000000e+00, 2.54831808e+03, 1.32091378e+03], [0.00000000e+00, 0.00000000e+00, 1.00000000e+00]]
 
-#v2_distortion = [[ 2.09253024e-01 -5.57973833e-01  1.47519344e-03  1.94738699e-04
-#   4.32871098e-01]]
+### GOOD DISTORTION COEFFS
+#v2_distortion = [[2.09253024e-01, -5.57973833e-01, 1.47519344e-03, 1.94738699e-04, 4.32871098e-01]]
+v2_distortion = [[2.09252088e-01, -5.57956918e-01,  1.47469357e-03,  1.98214721e-04, 4.32846735e-01]] 
+
 
 def get_camera_matrix_distortion_coeffs(image_path):
     # Define the aruco dictionary and charuco board
@@ -90,7 +87,7 @@ def detect_pose(image, camera_matrix, dist_coeffs):
     return undistorted_image, None, None 
 
 def main(image_path):
-    #camera_matrix, dist_coeffs = get_camera_matrix_distortion_coeffs(image_path)
+    camera_matrix, dist_coeffs = get_camera_matrix_distortion_coeffs(image_path)
     #camera_matrix = np.load('camera_matrix.npy')
     #dist_coeffs = np.load('dist_coeffs.npy')
 
