@@ -14,7 +14,7 @@ MARKER_LENGTH = 0.0255
 
 ### GOOD MATRIX
 #v2_matrix = [[2.54925342e+03, 0.00000000e+00, 1.62541108e+03], [0.00000000e+00, 2.54837090e+03, 1.32090857e+03], [0.00000000e+00, 0.00000000e+00, 1.00000000e+00]]
-v2_matrix = [[2.54919911e+03, 0.00000000e+00, 1.62543433e+03], [0.00000000e+00, 2.54831808e+03, 1.32091378e+03], [0.00000000e+00, 0.00000000e+00, 1.00000000e+00]]
+v2_matrix = [[2.54919911e+03, 0.00000000e+00, 1.62543433e+03],[0.00000000e+00, 2.54831808e+03, 1.32091378e+03],[0.00000000e+00, 0.00000000e+00, 1.00000000e+00]]
 
 ### GOOD DISTORTION COEFFS
 #v2_distortion = [[2.09253024e-01, -5.57973833e-01, 1.47519344e-03, 1.94738699e-04, 4.32871098e-01]]
@@ -83,11 +83,11 @@ def detect_pose(image, camera_matrix, dist_coeffs):
             # If pose estimation is successful, draw the axis
             if retval:
                 cv2.drawFrameAxes(undistorted_image, camera_matrix, dist_coeffs, rvec, tvec, length=0.1, thickness=15)
-                return undistorted_image, rotation_matrix, tvec 
+                return undistorted_image, rvec, tvec  # changed from rotation_matrix to rvec
     return undistorted_image, None, None 
 
 def main(image_path):
-    camera_matrix, dist_coeffs = get_camera_matrix_distortion_coeffs(image_path)
+    #camera_matrix, dist_coeffs = get_camera_matrix_distortion_coeffs(image_path)
     #camera_matrix = np.load('camera_matrix.npy')
     #dist_coeffs = np.load('dist_coeffs.npy')
 
