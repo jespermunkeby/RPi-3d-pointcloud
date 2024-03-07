@@ -16,7 +16,7 @@ The project is structured in 3 components - the RPi (in the RPi folder) code, th
 ## Running the backend API server
 To run the backend API you need a CUDA Nvidia GPU.
 
-1. Download the weights for metric finetune of depth-anything. Choose if you want the outdoor or indoor finetune based on your use case. The weights are availiable at [text](https://huggingface.co/spaces/LiheYoung/Depth-Anything/tree/main/checkpoints_metric_depth)
+1. Download the weights for metric finetune of depth-anything. Choose if you want the outdoor or indoor finetune based on your use case. The weights are availiable for download [here](https://huggingface.co/spaces/LiheYoung/Depth-Anything/tree/main/checkpoints_metric_depth)
 
 2. Open `/Depth-Anything/metric_depth/zoedepth/models/base_models/depth_anything.py` and change line 341 to `state_dict = torch.load('YOUR_CHECKPOINT_PATH_HERE', map_location='cpu')`
 

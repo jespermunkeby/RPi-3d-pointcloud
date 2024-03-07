@@ -8,6 +8,7 @@ import numpy as np
 import open3d as o3d
 from functools import reduce
 import cv2
+import datetime
 
 ##RUN WITH BASE!!!
 
@@ -18,6 +19,7 @@ app.config['ALLOWED_EXTENSIONS'] = {'jpg', 'jpeg'}
 
 lock = threading.Lock()
 shared_refresh_images = False
+pointcloud_timestamp = datetime.datetime.now().strftime("%m-%d_%H-%M-%S-%f")
 
 # Put data from rpis 
 # test it with:
@@ -185,5 +187,5 @@ def cleanup_directories():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, threaded=True, port=5000)
+    app.run(host='0.0.0.0', threaded=True, debug=True, port=5000) 
 
