@@ -7,6 +7,15 @@ Monitoring spaces can be done with many modalities, but 3d is an uncommon one as
 The project is structured in 3 components - the RPi (in the RPi folder) code, the frontend server (in the Frontend folder), and the backend API server (server.py).
 
 ## Running the RPi code
+*Assuming you have calibrated the cameras already. If not, please see the README in `Calibration/`*
+
+### On Camera-Pis:
+1. `cd /path/to/Handlers/Camera_Pi/`
+2. `python3 camera_main.py` 
+
+### On the Master-Pi:
+1. `cd /path/to/Handlers/Master_Pi/`
+2. `python3 master_main.py`
 
 ## Running the frontend server
 1. `cd frontend`
