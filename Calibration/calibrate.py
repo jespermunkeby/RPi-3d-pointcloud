@@ -39,13 +39,10 @@ def get_camera_matrix_distortion_coeffs(image_path):
         image_copy = image.copy()
         marker_corners, marker_ids, _ = cv2.aruco.detectMarkers(image, dictionary, parameters=params)
 
-<<<<<<< HEAD
         if not marker_ids.any():
             print(f"failed to get markers from {image_file}")
-=======
         if marker_ids[0] == None:
             exit
->>>>>>> fc7db8cfe9937c2303efa5c6858335270a5685f8
         
         # If at least one marker is detected
         if len(marker_ids) > 0:
@@ -64,12 +61,13 @@ def get_camera_matrix_distortion_coeffs(image_path):
 
     return camera_matrix, dist_coeffs
 
-def detect_pose(image, camera_matrix, dist_coeffs):
+def detect_pose(image, camera_matrix, dist_coeffs, image_name):
     # Undistort the image
     undistorted_image = cv2.undistort(image, camera_matrix, dist_coeffs)
 
     # Define the aruco dictionary and 
-        if not marker_ids.any():charuco board
+    #if not marker_ids.any():charuco board
+
     dictionary = cv2.aruco.getPredefinedDictionary(ARUCO_DICT)
     board = cv2.aruco.CharucoBoard((SQUARES_VERTICALLY, SQUARES_HORIZONTALLY), SQUARE_LENGTH, MARKER_LENGTH, dictionary)
     params = cv2.aruco.DetectorParameters()
@@ -78,7 +76,7 @@ def detect_pose(image, camera_matrix, dist_coeffs):
     marker_corners, marker_ids, _ = cv2.aruco.detectMarkers(undistorted_image, dictionary, parameters=params)
 
     # If at least one marker is detected
-    if len(marker_ids) > 0:
+    if marker_ids is not None and len(marker_ids) > 0:
         # Interpolate CharUco corners
         charuco_retval, charuco_corners, charuco_ids = cv2.aruco.interpolateCornersCharuco(marker_corners, marker_ids, undistorted_image, board)
 
@@ -86,12 +84,16 @@ def detect_pose(image, camera_matrix, dist_coeffs):
         if charuco_retval:
             retval, rvec, tvec = cv2.aruco.estimatePoseCharucoBoard(charuco_corners, charuco_ids, board, camera_matrix, dist_coeffs, None, None)
 
-            rotation_matrix, _ = cv2.Rodrigues(rvec)
+            #rotation_matrix, _ = cv2.Rodrigues(rvec)
 
             # If pose estimation is successful, draw the axis
             if retval:
                 cv2.drawFrameAxes(undistorted_image, camera_matrix, dist_coeffs, rvec, tvec, length=0.1, thickness=15)
                 return undistorted_image, rvec, tvec  # changed from rotation_matrix to rvec
+
+    else:
+        print(f"could not find pose in {image_name}")
+
     return undistorted_image, None, None 
 
 def main(image_path):
@@ -119,7 +121,7 @@ def main(image_path):
     for image_file in image_files:
         image = cv2.imread(image_file)
         #pose_image, rvec, tvec = detect_pose(image, camera_matrix, dist_coeffs)
-        pose_image, rvec, tvec = detect_pose(image, camera_matrix_np, dist_coeffs_np)
+        pose_image, rvec, tvec = detect_pose(image, camera_matrix_np, dist_coeffs_np, image_file)
 
         if rvec is not None and tvec is not None:
             # Convert vectors to lists for JSON serialization
