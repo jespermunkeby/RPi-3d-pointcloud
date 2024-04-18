@@ -1,3 +1,8 @@
+# Raspberry Pi 3d Pointcloud Room Tracker
+A simple way to monitor spatial information with a few raspberry Pi units.
+
+https://github.com/jespermunkeby/RPi-3d-pointcloud/assets/46975845/e01502a5-61a9-43fb-9a06-2b46b4b4f153
+
 # Background
 This is our project for the IK1332 IOT course at KTH. The parts of the code and system is *really* messy and hacky, but this is to be considered a "Proof of Concept" project.
 
